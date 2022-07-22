@@ -1,4 +1,6 @@
-﻿namespace _algorytm_7__Sumy_podzbiorow
+﻿using System.Diagnostics;
+
+namespace _algorytm_7__Sumy_podzbiorow
 {
     internal static class Program
     {
@@ -12,18 +14,24 @@
         private static void Main()
         {
             // List<float> Set = new() { 8, -1, 3, 4 }; // Set1
-            List<float> Set = new() { -4, 5, 1, 0 };  // Set2
+            List<float> Set = new() { -4, 5, 1, 0 }; // Set2
+            //List<float> Set = new() {   1, 5, -6, 6, -6, 2, 4, -5, 8, 10, -3, 4, 5, 8, -10}; // Set3
 
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            stopwatch.Start();
             DoMath(Set);  // Obliczanie wszystkich możliwośći ustawienia liczb w tablicy głównej i jej pod tablicach
+            stopwatch.Stop();
 
             List<List<float>> finalListOfSubSets = new();
             finalListOfSubSets.AddRange(_ListOfSubSets);
 
-            finalListOfSubSets = UsunJednoelementoweListy(finalListOfSubSets);  // FinalListOfSubSets nie ma zbiorów jednoelementowych
+            //finalListOfSubSets = UsunJednoelementoweListy(finalListOfSubSets);  // FinalListOfSubSets nie ma zbiorów jednoelementowych
 
             List<float> results = ObliczSumyZbiorow(finalListOfSubSets);  // Obliczanie sum elementów w zbiorach
 
             WyswietlOutput(results, finalListOfSubSets);  // Wyświetlanie wyników
+            Console.WriteLine(stopwatch.Elapsed);
         }
 
         /// <summary>
@@ -93,9 +101,10 @@
                 }
                 results.Add(result);
                 Console.Write("\t\t" + result);
-                result = 0;
                 Console.WriteLine();
+                result = 0;
             }
+            Console.WriteLine();
 
             return results;
         }
@@ -146,7 +155,7 @@
         /// <param name="n">Suma wykładników (liczba wszystkich elementów w głównym zbiorze).</param>
         /// <param name="k">Podstawa (ilosć miejsc w które możemy wkładać obiekty ze zbioru).</param>
         /// <returns>Wartość dwumianu Newtona.</returns>
-        public static int DwumianNewtona(int n, int k)
+        public static double DwumianNewtona(int n, int k)
         {
             return silnia(n) / (silnia(k) * silnia(n - k));
         }
@@ -156,7 +165,7 @@
         /// </summary>
         /// <param name="n">Liczba.</param>
         /// <returns>Wartość silni.</returns>
-        public static int silnia(int n)
+        public static double silnia(int n)
         {
             if (n > 1)
             {
