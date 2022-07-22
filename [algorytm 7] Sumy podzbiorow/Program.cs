@@ -30,7 +30,7 @@
                 SubSet.Add(mainNum);
                 // i - indeks liczby ktorej nie chcemy w subsecie, bo juz tam jest
 
-                for (int j = 0; j < Set.Count; j++) // tu jest problem bo dla ostatniej liczby juz nie sprawdza
+                for (int j = 0; j < Set.Count - reg; j++) // tu jest problem bo dla ostatniej liczby juz nie sprawdza
                 {
                     SubSet.Add(Set[j]);
                     
@@ -38,7 +38,7 @@
                     {
                         SubSet.Remove(Set[i]);
                     }
-                    //if(Set[j] == Set[i])   // !!!!!!!!!!!!!!!!!!!!!!!
+                    //if (Set[j] == Set[i])   // !!!!!!!!!!!!!!!!!!!!!!!
                     //{
                     //    SubSet.RemoveAt(j + 1);
                     //}
@@ -54,10 +54,15 @@
                 {
                     i = -1;
                 }
+                if (reg == Set.Count)
+                {
+                    break;
+                }
                 if (wszystkieIteracje == DwumianNewtona(Set.Count, Set.Count - dwumianIteracje))
                 {
                     reg++;
                     dwumianIteracje++;
+                    wszystkieIteracje = 0;
                 }
 
                 //if (reg == 4)
@@ -73,8 +78,9 @@
             {
                 foreach (float item in subList)
                 {
-                    Console.WriteLine(item);
+                    Console.Write(item + " ");
                 }
+                Console.WriteLine();
             }
 
 
